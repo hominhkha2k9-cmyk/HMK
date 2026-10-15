@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trang đăng nhập và đăng ký tài khoản hiện đại, an toàn. Hỗ trợ đăng nhập nhanh bằng Google hoặc tạo tài khoản mới với email.">
+  <meta name="keywords" content="đăng nhập, đăng ký, google sign-in, authentication, nexus auth">
+  <meta name="author" content="NexusAuth Team">
+  <title>NexusAuth - Đăng Nhập & Đăng Ký Tài Khoản</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dynamic Animated Background Elements -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="app-header">
+    <div class="brand-container">
+      <div class="brand-logo" id="brand-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366F1"/>
+              <stop offset="0.5" stop-color="#8B5CF6"/>
+              <stop offset="1" stop-color="#EC4899"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <span class="brand-name">Nexus<span class="brand-accent">Auth</span></span>
+    </div>
+
+    <div class="header-actions">
+      <!-- Theme Switcher -->
+      <button class="icon-btn" id="theme-toggle" title="Đổi giao diện Sáng / Tối" aria-label="Đổi giao diện">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Language Switcher Pill -->
+      <button class="lang-pill" id="lang-toggle" title="Chuyển đổi ngôn ngữ">
+        <span class="lang-flag">🇻🇳</span>
+        <span class="lang-text">VI</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Authentication Container -->
+  <main class="main-wrapper">
+
+    <!-- Card: Authentication (Login & Register) -->
+    <section class="auth-card" id="auth-card">
+
+      <!-- Header within Card -->
+      <div class="card-header">
+        <h1 class="card-title" id="card-main-title">Chào mừng trở lại!</h1>
+        <p class="card-subtitle" id="card-sub-title">Đăng nhập để khám phá hàng ngàn tính năng hấp dẫn</p>
+      </div>
+
+      <!-- Tab Switcher Segmented Control -->
+      <div class="tabs-container" role="tablist" aria-label="Chọn hình thức xác thực">
+        <div class="tab-glider" id="tab-glider"></div>
+        <button class="tab-btn active" id="tab-login" role="tab" aria-selected="true" aria-controls="form-login">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+            <polyline points="10 17 15 12 10 7"></polyline>
+            <line x1="15" y1="12" x2="3" y2="12"></line>
+          </svg>
+          <span>Đăng nhập</span>
+        </button>
+        <button class="tab-btn" id="tab-register" role="tab" aria-selected="false" aria-controls="form-register">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7.5" r="4"></circle>
+            <line x1="20" y1="8" x2="20" y2="14"></line>
+            <line x1="23" y1="11" x2="17" y2="11"></line>
+          </svg>
+          <span>Đăng ký</span>
+        </button>
+      </div>
+
+      <!-- Social Login: Google Button -->
+      <div class="social-auth-section">
+        <button type="button" class="google-btn" id="btn-google-auth">
+          <svg class="google-svg" viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+          </svg>
+          <span id="google-btn-label">Tiếp tục với Google</span>
+        </button>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider">
+        <span class="divider-line"></span>
+        <span class="divider-text" id="divider-text">hoặc tiếp tục với email</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- Form 1: LOGIN -->
+      <form class="auth-form active" id="form-login" novalidate>
+        <!-- Email / Username Input -->
+        <div class="input-group" id="login-email-group">
+          <label for="login-email" class="input-label">Email hoặc Tên đăng nhập</label>
+          <div class="input-field-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="login-email" 
+              class="form-input" 
+              placeholder="ví dụ: user@example.com" 
+              autocomplete="username" 
+              required
+            >
+          </div>
+          <span class="input-error-msg" id="login-email-error"></span>
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-group" id="login-password-group">
+          <label for="login-password" class="input-label">Mật khẩu</label>
+          <div class="input-field-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </span>
+            <input 
+              type="password" 
+              id="login-password" 
+              class="form-input" 
+              placeholder="Nhập mật khẩu của bạn" 
+              autocomplete="current-password" 
+              required
+            >
+            <button type="button" class="btn-toggle-pw" id="toggle-login-pw" aria-label="Hiện/ẩn mật khẩu">
+              <svg class="icon-eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="icon-eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <span class="input-error-msg" id="login-password-error"></span>
+        </div>
+
+        <!-- Remember Me & Forgot Password Row -->
+        <div class="form-options">
+          <label class="custom-checkbox">
+            <input type="checkbox" id="remember-me" checked>
+            <span class="checkbox-box">
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1.5 5.5 4.5 8.5 10.5 1.5"></polyline>
+              </svg>
+            </span>
+            <span class="checkbox-label">Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="#" class="forgot-link" id="link-forgot-pw">Quên mật khẩu?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn" id="btn-submit-login">
+          <span class="btn-text">Đăng nhập ngay</span>
+          <span class="btn-loader" style="display:none;">
+            <svg class="spinner" viewBox="0 0 24 24">
+              <circle class="path" cx="12" cy="12" r="10" fill="none" stroke-width="3"></circle>
+            </svg>
+          </span>
+          <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        <!-- Switch Tab Hint -->
+        <p class="form-switch-prompt">
+          Chưa có tài khoản? 
+          <a href="#" class="switch-link" id="link-to-register">Đăng ký tài khoản mới</a>
+        </p>
+      </form>
+
+      <!-- Form 2: REGISTER -->
+      <form class="auth-form" id="form-register" novalidate>
+        <!-- Full Name Input -->
+        <div class="input-group" id="reg-name-group">
+          <label for="reg-name" class="input-label">Họ và tên</label>
+          <div class="input-field-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="reg-name" 
+              class="form-input" 
+              placeholder="ví dụ: Nguyễn Văn An" 
+              autocomplete="name" 
+              required
+            >
+          </div>
+          <span class="input-error-msg" id="reg-name-error"></span>
+        </div>
+
+        <!-- Email Input -->
+        <div class="input-group" id="reg-email-group">
+          <label for="reg-email" class="input-label">Địa chỉ Email</label>
+          <div class="input-field-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </span>
+            <input 
+              type="email" 
+              id="reg-email" 
+              class="form-input" 
+              placeholder="ví dụ: name@domain.com" 
+              autocomplete="email" 
+              required
+            >
+          </div>
+          <span class="input-error-msg" id="reg-email-error"></span>
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-group" id="reg-password-group">
+          <label for="reg-password" class="input-label">Mật khẩu mới</label>
+          <div class="input-field-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </span>
+            <input 
+              type="password" 
+              id="reg-password" 
+              class="form-input" 
+              placeholder="Tối thiểu 8 ký tự, có số và chữ hoa" 
+              autocomplete="new-password" 
+              required
+            >
+            <button type="button" class="btn-toggle-pw" id="toggle-reg-pw" aria-label="Hiện/ẩn mật khẩu">
+              <svg class="icon-eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="icon-eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Password Strength Indicator -->
+          <div class="pw-strength-meter" id="pw-strength-meter">
+            <div class="strength-bars">
+              <div class="bar bar-1"></div>
+              <div class="bar bar-2"></div>
+              <div class="bar bar-3"></div>
+              <div class="bar bar-4"></div>
+            </div>
+            <div class="strength-status">
+              <span class="strength-label">Độ mạnh mật khẩu:</span>
+              <span class="strength-text" id="strength-text">Chưa nhập</span>
+            </div>
+          </div>
+
+          <span class="input-error-msg" id="reg-password-error"></span>
+        </div>
+
+        <!-- Confirm Password Input -->
+        <div class="input-group" id="reg-confirm-group">
+          <label for="reg-confirm-pw" class="input-label">Xác nhận mật khẩu</label>
+          <div class="input-field-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </span>
+            <input 
+              type="password" 
+              id="reg-confirm-pw" 
+              class="form-input" 
+              placeholder="Nhập lại mật khẩu vừa đặt" 
+              autocomplete="new-password" 
+              required
+            >
+            <span class="match-icon" id="pw-match-icon" style="display:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+          </div>
+          <span class="input-error-msg" id="reg-confirm-error"></span>
+        </div>
+
+        <!-- Terms & Policy Checkbox -->
+        <div class="terms-group">
+          <label class="custom-checkbox">
+            <input type="checkbox" id="reg-terms" required>
+            <span class="checkbox-box">
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1.5 5.5 4.5 8.5 10.5 1.5"></polyline>
+              </svg>
+            </span>
+            <span class="checkbox-label">
+              Tôi đồng ý với <a href="#" class="inline-link" id="link-terms">Điều khoản sử dụng</a> và <a href="#" class="inline-link" id="link-privacy">Chính sách bảo mật</a>
+            </span>
+          </label>
+          <span class="input-error-msg" id="reg-terms-error"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn register-submit" id="btn-submit-register">
+          <span class="btn-text">Đăng ký tài khoản mới</span>
+          <span class="btn-loader" style="display:none;">
+            <svg class="spinner" viewBox="0 0 24 24">
+              <circle class="path" cx="12" cy="12" r="10" fill="none" stroke-width="3"></circle>
+            </svg>
+          </span>
+          <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        <!-- Switch Tab Hint -->
+        <p class="form-switch-prompt">
+          Đã có tài khoản? 
+          <a href="#" class="switch-link" id="link-to-login">Đăng nhập ngay</a>
+        </p>
+      </form>
+
+    </section>
+
+    <!-- Card: Logged In State (Dashboard Preview) -->
+    <section class="auth-card profile-card" id="profile-card" style="display:none;">
+      <div class="profile-badge">
+        <span class="status-indicator"></span>
+        <span>Đã xác thực bảo mật</span>
+      </div>
+
+      <div class="profile-avatar-wrap">
+        <img src="" alt="Avatar người dùng" class="profile-avatar" id="user-avatar" style="display:none;">
+        <div class="profile-avatar-placeholder" id="user-avatar-initials">NA</div>
+      </div>
+
+      <h2 class="profile-name" id="user-display-name">Nguyễn Văn An</h2>
+      <p class="profile-email" id="user-display-email">nguyenvanan@gmail.com</p>
+
+      <div class="profile-meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">Phương thức xác thực</span>
+          <div class="meta-value" id="user-provider-badge">
+            <span class="provider-pill google">Google OAuth</span>
+          </div>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Trạng thái tài khoản</span>
+          <span class="meta-value text-success">Hoạt động bình thường</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Thời gian đăng nhập</span>
+          <span class="meta-value" id="user-login-time">Vừa xong</span>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button type="button" class="btn-dashboard" id="btn-demo-action">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>Vào Bảng Điều Khiển</span>
+        </button>
+
+        <button type="button" class="btn-logout" id="btn-logout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Đăng xuất tài khoản</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Google OAuth Sign-In Simulation -->
+  <div class="modal-backdrop" id="google-modal" aria-hidden="true" style="display:none;">
+    <div class="google-dialog" role="dialog" aria-modal="true" aria-labelledby="google-dialog-title">
+      <div class="google-dialog-header">
+        <svg class="google-svg" viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+        </svg>
+        <button class="modal-close-btn" id="close-google-modal" aria-label="Đóng cửa sổ">✕</button>
+      </div>
+
+      <h3 class="google-dialog-title" id="google-dialog-title">Đăng nhập bằng Google</h3>
+      <p class="google-dialog-sub">Chọn tài khoản để tiếp tục đăng ký hoặc đăng nhập vào <strong class="brand-accent">NexusAuth</strong></p>
+
+      <div class="google-account-list">
+        <!-- Account Item 1 -->
+        <button class="google-account-item" data-name="Nguyễn Văn A" data-email="nguyenvana.dev@gmail.com" data-avatar="A">
+          <div class="account-avatar-circle circle-blue">A</div>
+          <div class="account-text">
+            <span class="account-name">Nguyễn Văn A</span>
+            <span class="account-email">nguyenvana.dev@gmail.com</span>
+          </div>
+          <svg class="chevron-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <!-- Account Item 2 -->
+        <button class="google-account-item" data-name="Trần Thị Mai" data-email="maitran.design@gmail.com" data-avatar="M">
+          <div class="account-avatar-circle circle-purple">M</div>
+          <div class="account-text">
+            <span class="account-name">Trần Thị Mai</span>
+            <span class="account-email">maitran.design@gmail.com</span>
+          </div>
+          <svg class="chevron-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <!-- Custom Account Option -->
+        <button class="google-account-item custom-account-btn" id="btn-custom-google-account">
+          <div class="account-avatar-circle circle-gray">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="account-text">
+            <span class="account-name">Sử dụng tài khoản Google khác</span>
+            <span class="account-email">Nhập email hoặc số điện thoại</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Custom Google Account Input View (Hidden by default) -->
+      <div class="custom-google-view" id="custom-google-view" style="display:none;">
+        <div class="input-group">
+          <label for="custom-google-input" class="input-label">Email Google của bạn</label>
+          <input type="email" id="custom-google-input" class="form-input" placeholder="tenbanca@gmail.com">
+        </div>
+        <div class="google-custom-actions">
+          <button type="button" class="btn-text-back" id="btn-back-account-list">Quay lại danh sách</button>
+          <button type="button" class="btn-google-confirm" id="btn-confirm-custom-google">Tiếp tục</button>
+        </div>
+      </div>
+
+      <div class="google-dialog-footer">
+        <p>Để tiếp tục, Google sẽ chia sẻ tên, địa chỉ email, tùy chọn ngôn ngữ và ảnh hồ sơ của bạn với NexusAuth.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Forgot Password -->
+  <div class="modal-backdrop" id="forgot-modal" aria-hidden="true" style="display:none;">
+    <div class="glass-modal" role="dialog" aria-modal="true" aria-labelledby="forgot-modal-title">
+      <div class="modal-top">
+        <div class="modal-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <button class="modal-close-btn" id="close-forgot-modal" aria-label="Đóng">✕</button>
+      </div>
+
+      <h3 class="modal-title" id="forgot-modal-title">Khôi phục mật khẩu</h3>
+      <p class="modal-desc">Đừng lo lắng! Hãy nhập địa chỉ email đã đăng ký. Chúng tôi sẽ gửi đường dẫn đặt lại mật khẩu trong tích tắc.</p>
+
+      <form id="form-forgot-pw" novalidate>
+        <div class="input-group">
+          <label for="forgot-email" class="input-label">Email đã đăng ký</label>
+          <div class="input-field-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </span>
+            <input type="email" id="forgot-email" class="form-input" placeholder="ví dụ: ban@domain.com" required>
+          </div>
+          <span class="input-error-msg" id="forgot-email-error"></span>
+        </div>
+
+        <button type="submit" class="submit-btn" id="btn-submit-forgot">
+          <span class="btn-text">Gửi liên kết khôi phục</span>
+          <span class="btn-loader" style="display:none;">
+            <svg class="spinner" viewBox="0 0 24 24">
+              <circle class="path" cx="12" cy="12" r="10" fill="none" stroke-width="3"></circle>
+            </svg>
+          </span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Footer Info -->
+  <footer class="app-footer">
+    <p>© 2026 NexusAuth. Bảo mật đa lớp chuẩn quốc tế. Hỗ trợ đăng ký trực tiếp & Google OAuth.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
