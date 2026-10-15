@@ -45,3 +45,21 @@ Máy chủ cục bộ đang chạy tại:
 - [index.html](file:///d:/duanAPP/index.html): Cấu trúc ngữ nghĩa HTML5, tối ưu SEO, hỗ trợ Accessibility.
 - [style.css](file:///d:/duanAPP/style.css): Hệ thống thiết kế CSS variables, Glassmorphism, Animation, Responsive.
 - [app.js](file:///d:/duanAPP/app.js): Xử lý toàn bộ logic tương tác, xác thực, Google simulation, theme toggle, lưu trữ trạng thái.
+- [sync.bat](file:///d:/duanAPP/sync.bat): Script 1-click đẩy mọi thay đổi lên GitHub ngay lập tức.
+- [auto_watch.bat](file:///d:/duanAPP/auto_watch.bat): Chế độ tự động phát hiện khi lưu file (Ctrl+S) và tự động push lên GitHub theo thời gian thực.
+
+---
+
+## 🔄 Tự Động Đồng Bộ Thay Đổi Lên GitHub
+
+Repository: **[hominhkha2k9-cmyk/HMK](https://github.com/hominhkha2k9-cmyk/HMK)**
+
+### Lựa chọn 1: Chế độ 1-Click (`sync.bat`)
+Mỗi khi bạn muốn đẩy các thay đổi vừa làm lên GitHub:
+- Nhấp đúp vào [sync.bat](file:///d:/duanAPP/sync.bat).
+- Hoặc mở terminal gõ: `.\sync.bat "tin nhắn commit tùy ý"`.
+
+### Lựa chọn 2: Chế độ Tự Động Thời Gian Thực (`auto_watch.bat`)
+- Nhấp đúp vào [auto_watch.bat](file:///d:/duanAPP/auto_watch.bat) để bật chế độ theo dõi.
+- Cứ mỗi khi bạn nhấn **Ctrl + S** để lưu bất kỳ file nào (`index.html`, `style.css`, `app.js`...), hệ thống sẽ tự động gom thay đổi, tạo commit kèm mốc thời gian và push thẳng lên GitHub.
+- Nhấn **Ctrl + C** trong cửa sổ bất kỳ lúc nào nếu muốn dừng theo dõi.
