@@ -69,6 +69,14 @@
         <span class="lang-flag">🇻🇳</span>
         <span class="lang-text">VI</span>
       </button>
+
+      <!-- Admin Dashboard Link -->
+      <a href="admin.html" class="admin-link-btn" title="Khu vực Quản trị viên (Mã xác nhận: dashboard)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Admin</span>
+      </a>
     </div>
   </header>
 
@@ -375,58 +383,355 @@
 
     </section>
 
-    <!-- Card: Logged In State (Dashboard Preview) -->
-    <section class="auth-card profile-card" id="profile-card" style="display:none;">
-      <div class="profile-badge">
-        <span class="status-indicator"></span>
-        <span>Đã xác thực bảo mật</span>
-      </div>
-
-      <div class="profile-avatar-wrap">
-        <img src="" alt="Avatar người dùng" class="profile-avatar" id="user-avatar" style="display:none;">
-        <div class="profile-avatar-placeholder" id="user-avatar-initials">NA</div>
-      </div>
-
-      <h2 class="profile-name" id="user-display-name">Nguyễn Văn An</h2>
-      <p class="profile-email" id="user-display-email">nguyenvanan@gmail.com</p>
-
-      <div class="profile-meta-grid">
-        <div class="meta-item">
-          <span class="meta-label">Phương thức xác thực</span>
-          <div class="meta-value" id="user-provider-badge">
-            <span class="provider-pill google">Google OAuth</span>
+    <!-- Card: Logged In State (Data Upload & Management Dashboard) -->
+    <section class="dashboard-wrapper" id="dashboard-card" style="display:none;">
+      
+      <!-- Top Bar: User Profile Summary & Actions -->
+      <header class="dash-top-bar">
+        <div class="dash-user-info">
+          <div class="dash-avatar-wrap">
+            <img src="" alt="Avatar" class="dash-avatar-img" id="dash-user-avatar" style="display:none;">
+            <div class="dash-avatar-initials" id="dash-user-initials">NA</div>
+          </div>
+          <div class="dash-user-text">
+            <div class="dash-greeting-row">
+              <h2 class="dash-greeting">Xin chào, <span class="highlight-name" id="dash-user-name">Nguyễn Văn An</span>! 👋</h2>
+              <span class="badge-status-online"><span class="dot-pulse"></span> Trực tuyến</span>
+            </div>
+            <div class="dash-meta-row">
+              <span class="dash-email" id="dash-user-email">nguyenvanan@gmail.com</span>
+              <span class="meta-sep">•</span>
+              <span class="badge-provider" id="dash-user-provider">Google OAuth</span>
+              <span class="meta-sep">•</span>
+              <span class="badge-security">🔒 Mã hóa AES-256</span>
+            </div>
           </div>
         </div>
-        <div class="meta-item">
-          <span class="meta-label">Trạng thái tài khoản</span>
-          <span class="meta-value text-success">Hoạt động bình thường</span>
+
+        <div class="dash-actions">
+          <a href="admin.html" class="btn-dash-admin" title="Bảng điều khiển Quản trị viên (Mã xác nhận: dashboard)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Admin</span>
+          </a>
+          <button type="button" class="btn-dash-profile" id="btn-open-profile-modal" title="Xem chi tiết tài khoản">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Hồ Sơ</span>
+          </button>
+          <button type="button" class="btn-dash-logout" id="btn-dash-logout" title="Đăng xuất khỏi phiên làm việc">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Đăng xuất</span>
+          </button>
         </div>
-        <div class="meta-item">
-          <span class="meta-label">Thời gian đăng nhập</span>
-          <span class="meta-value" id="user-login-time">Vừa xong</span>
+      </header>
+
+      <!-- Storage & Quick Stats Row -->
+      <div class="dash-stats-grid">
+        <!-- Stat 1: Storage Used -->
+        <div class="dash-stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Dung Lượng Đã Dùng</span>
+            <div class="stat-icon-pill icon-blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value-row">
+            <span class="stat-main-value" id="stat-storage-text">14.8 MB</span>
+            <span class="stat-sub-value">/ 10 GB</span>
+          </div>
+          <div class="stat-progress-bar">
+            <div class="stat-progress-fill" id="stat-storage-bar" style="width: 1.5%;"></div>
+          </div>
+          <div class="stat-footer-text">
+            <span>Còn trống 9.98 GB</span>
+            <span class="text-accent" id="stat-storage-percent">1.5%</span>
+          </div>
+        </div>
+
+        <!-- Stat 2: Total Files -->
+        <div class="dash-stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Tổng Số Tệp Dữ Liệu</span>
+            <div class="stat-icon-pill icon-purple">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value-row">
+            <span class="stat-main-value" id="stat-files-count">4</span>
+            <span class="stat-sub-value">tệp đã lưu trữ</span>
+          </div>
+          <div class="stat-tags-row">
+            <span class="stat-mini-pill" id="stat-docs-count">2 Tài liệu</span>
+            <span class="stat-mini-pill" id="stat-imgs-count">1 Hình ảnh</span>
+            <span class="stat-mini-pill" id="stat-data-count">1 Bảng dữ liệu</span>
+          </div>
+          <div class="stat-footer-text">
+            <span>Tự động sao lưu đám mây</span>
+            <span class="text-success">Hoạt động tốt</span>
+          </div>
+        </div>
+
+        <!-- Stat 3: Google Drive Cloud Sync -->
+        <div class="dash-stat-card stat-card-drive">
+          <div class="stat-card-header">
+            <span class="stat-label">Đồng Bộ Google Drive</span>
+            <div class="stat-icon-pill icon-drive" style="background: rgba(38, 132, 252, 0.15);">
+              <svg width="22" height="22" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H1.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h26z" fill="#00ac47"/>
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-26.05l5.85 10.1z" fill="#ea4335"/>
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h26.05c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value-row">
+            <span class="stat-main-value" style="background: linear-gradient(135deg, #2684fc, #00ac47); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Google Drive</span>
+            <span class="stat-sub-value">Thư mục đã nối</span>
+          </div>
+          <div class="stat-drive-details">
+            <div class="drive-folder-mini">Folder: <code>1Vc0cv2dB-6wLxua...</code></div>
+            <div class="drive-btn-group">
+              <a href="https://drive.google.com/drive/folders/1Vc0cv2dB-6wLxuaEcbv-LjKi7nq3xHXQ" target="_blank" rel="noopener noreferrer" class="btn-open-drive-pill" title="Mở thư mục Google Drive trực tiếp">
+                <span>Mở Drive</span> ↗
+              </a>
+              <button type="button" class="btn-config-drive-pill" id="btn-open-drive-modal" title="Cấu hình đồng bộ Google Drive">
+                ⚙️ Kết nối
+              </button>
+            </div>
+          </div>
+          <div class="stat-footer-text">
+            <span>Trạng thái Drive</span>
+            <span class="text-success" id="drive-stat-status">● Đã liên kết thư mục</span>
+          </div>
         </div>
       </div>
 
-      <div class="profile-actions">
-        <button type="button" class="btn-dashboard" id="btn-demo-action">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-          <span>Vào Bảng Điều Khiển</span>
-        </button>
+      <!-- Main Upload Hub -->
+      <div class="upload-hub-card">
+        <!-- Hub Navigation Tabs -->
+        <div class="hub-tabs-header">
+          <div class="hub-tabs-list">
+            <button type="button" class="hub-tab-btn active" id="tab-mode-files">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span>Tải Lên Tệp Tin (File Upload)</span>
+            </button>
+            <button type="button" class="hub-tab-btn" id="tab-mode-raw">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <span>Nhập Dữ Liệu Trực Tiếp (JSON / CSV / Text)</span>
+            </button>
+          </div>
+          <div class="hub-badge-info">
+            <span class="cloud-icon">☁️</span> Tải lên đám mây bảo mật
+          </div>
+        </div>
 
-        <button type="button" class="btn-logout" id="btn-logout">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-          <span>Đăng xuất tài khoản</span>
-        </button>
+        <!-- Mode 1: Drag & Drop File Upload -->
+        <div class="hub-panel active" id="panel-upload-files">
+          <div class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-label="Khu vực kéo thả tệp tải lên">
+            <input type="file" id="file-uploader" multiple style="display: none;">
+            <div class="drop-zone-glow"></div>
+            <div class="drop-icon-animated">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+            </div>
+            <h3 class="drop-title">Kéo & thả tệp dữ liệu vào đây để tải lên</h3>
+            <p class="drop-subtitle">hoặc nhấn vào nút bên dưới để duyệt tệp từ máy tính của bạn</p>
+            <button type="button" class="btn-browse-action" id="btn-browse-files">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>
+              <span>Chọn Tệp Tin Từ Máy</span>
+            </button>
+
+            <div class="supported-formats-pills">
+              <span class="format-pill">PDF</span>
+              <span class="format-pill">Word (.docx)</span>
+              <span class="format-pill">Excel (.xlsx)</span>
+              <span class="format-pill">CSV</span>
+              <span class="format-pill">JSON</span>
+              <span class="format-pill">PNG / JPG</span>
+              <span class="format-pill">ZIP</span>
+              <span class="format-pill">Text (.txt)</span>
+            </div>
+            <span class="drop-max-size">Hỗ trợ tải lên cùng lúc nhiều tệp • Dung lượng tối đa 50MB / tệp</span>
+          </div>
+        </div>
+
+        <!-- Mode 2: Direct Raw Data / JSON / CSV Input -->
+        <div class="hub-panel" id="panel-upload-raw" style="display: none;">
+          <form class="raw-data-form" id="raw-data-form">
+            <div class="raw-form-header-row">
+              <div class="input-group">
+                <label for="raw-file-name" class="input-label">Tên tệp dữ liệu</label>
+                <input type="text" id="raw-file-name" class="form-input" placeholder="ví dụ: khach_hang_2026.json" required>
+              </div>
+              <div class="input-group">
+                <label for="raw-file-type" class="input-label">Định dạng nội dung</label>
+                <select id="raw-file-type" class="form-input form-select">
+                  <option value="json">JSON (.json)</option>
+                  <option value="csv">Bảng CSV (.csv)</option>
+                  <option value="text">Văn bản thô (.txt)</option>
+                  <option value="sql">SQL Query (.sql)</option>
+                  <option value="markdown">Markdown (.md)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="label-with-actions">
+                <label for="raw-content" class="input-label">Nội dung dữ liệu</label>
+                <div class="raw-text-actions">
+                  <button type="button" class="btn-tool-mini" id="btn-format-json" title="Định dạng chuẩn JSON">⚡ Làm đẹp JSON</button>
+                  <button type="button" class="btn-tool-mini" id="btn-sample-data" title="Chèn dữ liệu mẫu">📋 Dữ liệu mẫu</button>
+                  <button type="button" class="btn-tool-mini" id="btn-clear-raw" title="Xóa trắng">🗑️ Xóa trắng</button>
+                </div>
+              </div>
+              <textarea id="raw-content" class="form-input form-textarea" rows="7" placeholder="Nhập hoặc dán nội dung JSON, CSV hoặc ghi chú dữ liệu vào đây..." required></textarea>
+            </div>
+
+            <div class="raw-submit-row">
+              <span class="raw-helper-info">Dữ liệu được mã hóa và lưu trực tiếp vào kho lưu trữ của bạn</span>
+              <button type="submit" class="btn-primary-action" id="btn-submit-raw-data">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                  <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                  <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                <span>Lưu & Tải Dữ Liệu Lên Kho</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Upload Queue & Progress Section -->
+        <div class="upload-queue-container" id="upload-queue-container" style="display: none;">
+          <div class="queue-header">
+            <span class="queue-title">
+              <span class="spinner-mini"></span>
+              Đang tải lên và xử lý tệp dữ liệu...
+            </span>
+            <span class="queue-count" id="queue-count-text">1 / 1 tệp</span>
+          </div>
+          <div class="queue-list" id="queue-items-list">
+            <!-- Dynamic Queue Item -->
+          </div>
+        </div>
       </div>
+
+      <!-- Data Files Management Section -->
+      <div class="files-manager-card">
+        <div class="files-manager-header">
+          <div class="files-title-wrap">
+            <h3 class="files-section-title">Kho Dữ Liệu Của Bạn</h3>
+            <span class="files-count-badge" id="files-counter-badge">4 tệp</span>
+          </div>
+
+          <!-- Search & Filter Controls -->
+          <div class="files-toolbar">
+            <div class="search-input-wrap">
+              <span class="search-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input type="text" id="file-search-input" class="search-input" placeholder="Tìm kiếm tệp theo tên hoặc đuôi mở rộng...">
+              <button type="button" class="btn-clear-search" id="btn-clear-search" style="display: none;" title="Xóa tìm kiếm">✕</button>
+            </div>
+
+            <!-- Sync All to Drive Button -->
+            <button type="button" class="btn-sync-all-drive" id="btn-sync-all-drive" title="Đồng bộ tất cả tệp lên Google Drive">
+              <svg width="16" height="16" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H1.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h26z" fill="#00ac47"/>
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-26.05l5.85 10.1z" fill="#ea4335"/>
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h26.05c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+              </svg>
+              <span>Đồng Bộ Lên Drive</span>
+            </button>
+
+            <div class="view-mode-toggle">
+              <button type="button" class="view-btn active" id="view-mode-grid" title="Chế độ Lưới (Grid View)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </button>
+              <button type="button" class="view-btn" id="view-mode-list" title="Chế độ Danh sách (List View)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Categories Pills -->
+        <div class="filter-categories-row">
+          <button type="button" class="category-pill active" data-filter="all">Tất cả tệp</button>
+          <button type="button" class="category-pill" data-filter="doc">📄 Tài liệu (PDF, Word, TXT)</button>
+          <button type="button" class="category-pill" data-filter="img">🖼️ Hình ảnh (PNG, JPG, SVG)</button>
+          <button type="button" class="category-pill" data-filter="data">📊 Bảng tính & CSV</button>
+          <button type="button" class="category-pill" data-filter="code">⚙️ JSON & Mã nguồn</button>
+        </div>
+
+        <!-- Files Container (Grid or List View) -->
+        <div class="files-container grid-view" id="files-container">
+          <!-- Dynamically Injected File Cards -->
+        </div>
+
+        <!-- Empty State (When no files match search/filter) -->
+        <div class="files-empty-state" id="files-empty-state" style="display: none;">
+          <div class="empty-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+          <h4 class="empty-title">Không tìm thấy tệp nào</h4>
+          <p class="empty-desc">Không có dữ liệu phù hợp với bộ lọc hiện tại. Bạn có thể tải lên tệp mới ngay bây giờ!</p>
+          <button type="button" class="btn-empty-upload" id="btn-empty-upload">Tải lên tệp mới ngay</button>
+        </div>
+      </div>
+
     </section>
 
   </main>
@@ -544,12 +849,193 @@
     </div>
   </div>
 
+  <!-- Modal: File Data Preview Modal -->
+  <div class="modal-backdrop" id="preview-modal" aria-hidden="true" style="display:none;">
+    <div class="preview-dialog" role="dialog" aria-modal="true" aria-labelledby="preview-file-name">
+      <div class="preview-dialog-header">
+        <div class="preview-title-info">
+          <span class="preview-type-badge" id="preview-badge">JSON</span>
+          <div class="preview-headings">
+            <h3 class="preview-file-name" id="preview-file-name">filename.json</h3>
+            <span class="preview-file-meta" id="preview-file-meta">Kích thước: 1.2 MB • Cập nhật lúc 18:20</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="close-preview-modal" aria-label="Đóng cửa sổ xem trước">✕</button>
+      </div>
+
+      <div class="preview-body" id="preview-body">
+        <!-- Dynamic Content: Image viewer, Code/JSON formatted text, CSV Table, or Document Summary -->
+      </div>
+
+      <div class="preview-footer">
+        <div class="preview-footer-left">
+          <span class="preview-security-note">🔒 Tệp được lưu trữ an toàn trong kho dữ liệu cục bộ</span>
+        </div>
+        <div class="preview-footer-actions">
+          <button type="button" class="btn-preview-copy" id="btn-preview-copy">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Sao Chép Dữ Liệu</span>
+          </button>
+          <button type="button" class="btn-preview-download" id="btn-preview-download">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Tải Tệp Về Máy</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: User Account Profile Details -->
+  <div class="modal-backdrop" id="profile-modal" aria-hidden="true" style="display:none;">
+    <div class="glass-modal profile-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
+      <div class="modal-top">
+        <div class="modal-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <button class="modal-close-btn" id="close-profile-modal" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="profile-modal-avatar-row">
+        <div class="dash-avatar-initials large" id="modal-user-avatar">NA</div>
+        <div class="profile-modal-user-text">
+          <h3 class="profile-modal-name" id="modal-user-name">Nguyễn Văn An</h3>
+          <p class="profile-modal-email" id="modal-user-email">nguyenvanan@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="profile-meta-grid" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+        <div class="meta-item">
+          <span class="meta-label">Phương thức xác thực:</span>
+          <span class="meta-value" id="modal-user-provider">Google OAuth 2.0</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Thời gian đăng nhập:</span>
+          <span class="meta-value" id="modal-user-time">Vừa xong</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Gói lưu trữ:</span>
+          <span class="meta-value text-success">Gói Pro (10 GB)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Cấp độ bảo mật:</span>
+          <span class="meta-value text-success">Đã bật 2FA & Mã hóa E2EE</span>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button type="button" class="btn-logout" id="btn-modal-logout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Đăng xuất tài khoản</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Google Drive Cloud Integration -->
+  <div class="modal-backdrop" id="drive-modal" aria-hidden="true" style="display:none;">
+    <div class="glass-modal drive-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="drive-modal-title">
+      <div class="modal-top">
+        <div class="modal-icon-wrap" style="background: rgba(38, 132, 252, 0.15);">
+          <svg width="26" height="26" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+            <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H1.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+            <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h26z" fill="#00ac47"/>
+            <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-26.05l5.85 10.1z" fill="#ea4335"/>
+            <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+            <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+            <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h26.05c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+          </svg>
+        </div>
+        <button class="modal-close-btn" id="close-drive-modal" aria-label="Đóng">✕</button>
+      </div>
+
+      <h3 class="modal-title" id="drive-modal-title">Liên Kết & Đồng Bộ Google Drive</h3>
+      <p class="modal-desc">Kết nối kho dữ liệu ứng dụng trực tiếp với thư mục Google Drive của bạn.</p>
+
+      <!-- Target Folder Card -->
+      <div class="drive-target-box">
+        <div class="target-box-header">
+          <span class="target-label">Thư mục Google Drive đích:</span>
+          <span class="badge-status-online"><span class="dot-pulse"></span> Đã kết nối</span>
+        </div>
+        <div class="target-folder-url">
+          <input type="text" readonly value="https://drive.google.com/drive/folders/1Vc0cv2dB-6wLxuaEcbv-LjKi7nq3xHXQ" class="form-input drive-url-input" id="drive-folder-url-display">
+          <a href="https://drive.google.com/drive/folders/1Vc0cv2dB-6wLxuaEcbv-LjKi7nq3xHXQ" target="_blank" rel="noopener noreferrer" class="btn-visit-drive">
+            Mở Thư Mục ↗
+          </a>
+        </div>
+        <p class="target-folder-id">ID Thư mục: <code>1Vc0cv2dB-6wLxuaEcbv-LjKi7nq3xHXQ</code></p>
+      </div>
+
+      <!-- Realtime Webhook / Apps Script Integration -->
+      <div class="drive-webhook-section">
+        <div class="webhook-header">
+          <h4 class="webhook-title">⚡ Cấu hình Webhook Tải Lên Tự Động (Google Apps Script)</h4>
+          <span class="badge-free">Miễn phí 100%</span>
+        </div>
+        <p class="webhook-desc">Để đồng bộ tự động trực tiếp từ trình duyệt vào thư mục Google Drive, bạn chỉ cần dán URL Webhook Google Apps Script bên dưới:</p>
+        <div class="input-group">
+          <label for="drive-webhook-url" class="input-label">URL Webhook Google Apps Script (Tuỳ chọn)</label>
+          <input type="url" id="drive-webhook-url" class="form-input" placeholder="https://script.google.com/macros/s/.../exec">
+        </div>
+        <div class="webhook-actions">
+          <button type="button" class="btn-save-webhook" id="btn-save-webhook">Lưu Cấu Hình</button>
+          <button type="button" class="btn-view-script" id="btn-view-script">📋 Xem Mã Apps Script (1-Click)</button>
+        </div>
+
+        <!-- Script Guide Dropdown / Code Snippet -->
+        <div class="script-snippet-wrap" id="script-snippet-wrap" style="display:none;">
+          <div class="snippet-header">
+            <span>Dán đoạn mã này vào Google Apps Script:</span>
+            <button type="button" class="btn-copy-script" id="btn-copy-script">Sao chép mã</button>
+          </div>
+          <pre class="snippet-code"><code>function doPost(e) {
+  var data = JSON.parse(e.postData.contents);
+  var folder = DriveApp.getFolderById("1Vc0cv2dB-6wLxuaEcbv-LjKi7nq3xHXQ");
+  var decoded = Utilities.base64Decode(data.base64.split(",")[1] || data.base64);
+  var blob = Utilities.newBlob(decoded, data.mimeType, data.fileName);
+  var file = folder.createFile(blob);
+  return ContentService.createTextOutput(JSON.stringify({status:"ok", url: file.getUrl()}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="drive-modal-footer">
+        <button type="button" class="btn-primary-action btn-sync-now" id="btn-modal-sync-all">
+          <svg width="18" height="18" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+            <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H1.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+            <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h26z" fill="#00ac47"/>
+            <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-26.05l5.85 10.1z" fill="#ea4335"/>
+            <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+            <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+            <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h26.05c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+          </svg>
+          <span>Đồng Bộ Toàn Bộ Dữ Liệu Lên Drive</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toast-container" aria-live="polite"></div>
 
   <!-- Footer Info -->
   <footer class="app-footer">
-    <p>© 2026 NexusAuth. Bảo mật đa lớp chuẩn quốc tế. Hỗ trợ đăng ký trực tiếp & Google OAuth.</p>
+    <p>© 2026 NexusAuth. Bảo mật đa lớp chuẩn quốc tế. Hỗ trợ đăng ký trực tiếp & Google OAuth. • <a href="admin.html" style="color:var(--primary); text-decoration:none; font-weight:600;">🛡️ Bảng điều khiển Quản trị (Admin)</a></p>
   </footer>
 
   <script src="app.js"></script>

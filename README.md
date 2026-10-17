@@ -25,26 +25,51 @@ Trang xác thực người dùng cao cấp được xây dựng bằng **HTML5, 
    - Chuyển đổi giao diện Sáng / Tối (Dark / Light Theme) linh hoạt, lưu trạng thái người dùng.
    - Chuyển đổi ngôn ngữ Tiếng Việt 🇻🇳 / English 🇺🇸.
    - Hệ thống thông báo nổi (Toast Notifications) đẹp mắt.
-   - Xem trước Hồ sơ người dùng / Bảng điều khiển (Dashboard Preview) sau khi đăng nhập thành công.
+
+5. **Kho Quản Lý & Tải Lên Tệp Tin (File Upload Hub)**:
+   - Hiển thị tự động sau khi đăng nhập thành công qua form hoặc Google OAuth.
+   - Kéo & thả tệp tin (Drag & Drop) hoặc duyệt chọn nhiều tệp tin cùng lúc từ máy tính.
+   - Hỗ trợ nhập trực tiếp dữ liệu thô (JSON / CSV / SQL / Text) kèm công cụ làm đẹp JSON tự động.
+   - Hàng đợi tải lên hiển thị thanh tiến trình (Progress Bar) mô phỏng mã hóa thời gian thực.
+   - Quản lý kho dữ liệu cá nhân: thống kê dung lượng đã dùng (10 GB quota), phân loại tệp (Tài liệu, Hình ảnh, Bảng tính, Code).
+   - Tìm kiếm tệp tin tức thì theo tên/phần mở rộng, lọc theo danh mục, chuyển đổi linh hoạt chế độ Lưới (Grid) và Danh sách (List).
+   - Xem trước nhanh nội dung tệp (Preview Modal: hình ảnh, bảng CSV, mã code định dạng chuẩn), sao chép và tải tệp về máy tính.
+   - Modal xem hồ sơ chi tiết và đăng xuất an toàn khỏi hệ thống.
+
+6. **Bảng Điều Khiển Quản Trị Viên (Admin Dashboard - admin.html)**:
+   - Bảo mật bằng màn hình khoá với mã xác nhận bắt buộc: **`dashboard`**.
+   - Quản lý toàn diện tài khoản & phiên đăng nhập của người dùng theo thời gian thực (đồng bộ tự động giữa các tab qua `localStorage`).
+   - Thống kê thời gian thực: Tổng số tài khoản, số lượt đăng nhập hôm nay, tỷ lệ Google OAuth, số tài khoản bị vô hiệu hoá.
+   - Quản lý trạng thái tài khoản: Bật/tắt trạng thái hoạt động (Active / Disabled) tức thì.
+   - Xem chi tiết từng tài khoản: Lịch sử đăng nhập, địa chỉ IP giả lập, Provider, vai trò.
+   - Tìm kiếm nâng cao, lọc theo Provider, trạng thái, thời gian, sắp xếp và phân trang.
+   - Chế độ xem linh hoạt: Dạng bảng (Table View) và dạng thẻ (Grid View).
+   - Xuất dữ liệu danh sách tài khoản ra file **CSV** chuẩn UTF-8.
+   - Tuỳ chọn đổi mã xác nhận admin, xoá sạch nhật ký hoặc nạp lại dữ liệu mẫu.
 
 ---
 
 ## 🚀 Cách Mở & Chạy Dự Án
 
 ### Cách 1: Mở trực tiếp bằng trình duyệt
-Nhấp đúp chuột vào tệp [index.html](file:///d:/duanAPP/index.html) để mở trên Google Chrome, Microsoft Edge, Cốc Cốc hoặc trình duyệt yêu thích.
+- Mở trang người dùng: Nhấp đúp chuột vào tệp [index.html](file:///d:/duanAPP/index.html).
+- Mở bảng quản trị: Nhấp đúp chuột vào tệp [admin.html](file:///d:/duanAPP/admin.html) (Mã xác nhận: `dashboard`).
 
 ### Cách 2: Chạy qua Local Server
 Máy chủ cục bộ đang chạy tại:
-👉 **[http://localhost:5500](http://localhost:5500)**
+- Trang ứng dụng chính: 👉 **[http://localhost:5500](http://localhost:5500)**
+- Trang quản trị Admin: 👉 **[http://localhost:5500/admin.html](http://localhost:5500/admin.html)**
 
 ---
 
 ## 📁 Cấu Trúc Thư Mục
 
-- [index.html](file:///d:/duanAPP/index.html): Cấu trúc ngữ nghĩa HTML5, tối ưu SEO, hỗ trợ Accessibility.
-- [style.css](file:///d:/duanAPP/style.css): Hệ thống thiết kế CSS variables, Glassmorphism, Animation, Responsive.
-- [app.js](file:///d:/duanAPP/app.js): Xử lý toàn bộ logic tương tác, xác thực, Google simulation, theme toggle, lưu trữ trạng thái.
+- [index.html](file:///d:/duanAPP/index.html): Cấu trúc trang xác thực & Kho tải lên tệp tin.
+- [style.css](file:///d:/duanAPP/style.css): Hệ thống thiết kế CSS variables, Glassmorphism, Animation, Responsive cho trang người dùng.
+- [app.js](file:///d:/duanAPP/app.js): Xử lý toàn bộ logic tương tác người dùng, upload tệp tin, xem trước, lưu trữ phiên.
+- [admin.html](file:///d:/duanAPP/admin.html): Giao diện bảng điều khiển quản trị viên và màn hình khoá bảo vệ.
+- [admin.css](file:///d:/duanAPP/admin.css): Thiết kế chuyên biệt cho hệ thống quản trị, bảng dữ liệu, thanh điều hướng sidebar.
+- [admin.js](file:///d:/duanAPP/admin.js): Toàn bộ nghiệp vụ xác thực mã `dashboard`, quản lý tài khoản, lọc, tìm kiếm, xuất CSV, đồng bộ realtime.
 - [sync.bat](file:///d:/duanAPP/sync.bat): Script 1-click đẩy mọi thay đổi lên GitHub ngay lập tức.
 - [auto_watch.bat](file:///d:/duanAPP/auto_watch.bat): Chế độ tự động phát hiện khi lưu file (Ctrl+S) và tự động push lên GitHub theo thời gian thực.
 
